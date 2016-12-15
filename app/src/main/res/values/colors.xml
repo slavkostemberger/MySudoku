@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <!-- Primary colour for the activty pager version of the app -->
+    <color name="category_activity_pager">#8bc34a</color>
+    <!-- Primary color of the app (shown in the app bar) -->
+    <color name="primary_color">#4A312A</color>
+
+    <!-- Primary dark color of the app (shown in the status bar) -->
+    <color name="primary_dark_color">#2F1D1A</color>
+
+    <!-- Background color for app -->
+    <color name="tan_background">#FFF7DA</color>
+
+    <!-- Background color for the numbers category -->
+    <color name="category_numbers">#FD8E09</color>
+
+    <!-- Background color for the family members category -->
+    <color name="category_family">#379237</color>
+
+    <!-- Background color for the colors category -->
+    <color name="category_colors">#8800A0</color>
+
+    <!-- Background color for the phrases category -->
+    <color name="category_phrases">#16AFCA</color>
+
+    <color name="color_red">#f44336</color>
+    <color name="color_pink">#e91e63</color>
+    <color name="color_purple">#9c27b0</color>
+    <color name="color_deep_purple">#673ab7</color>
+    <color name="color_indigo">#3f51b5</color>
+    <color name="color_blue">#2196f3</color>
+    <color name="color_light_blue">#03a9f4</color>
+    <color name="color_cyan">#00bcd4</color>
+    <color name="color_teal">#009688</color>
+    <color name="color_green">#4caf50</color>
+    <color name="color_light_green">#8bc34a</color>
+    <color name="color_lime">#cddc39</color>
+    <color name="color_yellow">#ffeb3b</color>
+    <color name="color_amber">#ffc107</color>
+    <color name="color_orange">#ff9800</color>
+    <color name="color_deep_orange">#ff5722</color>
+    <color name="color_brown">#795548</color>
+    <color name="color_grey">#9e9e9e</color>
+    <color name="color_blue_gray">#607d8b</color>
+    <color name="color_black">#000000</color>
+    <color name="color_white">#ffffff</color>
+
+</resources>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ca.starsoft.androidstudies.mysodoku.SquareTextView xmlns:android="http://schemas.android.com/apk/res/android"
+                                                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                    xmlns:tools="http://schemas.android.com/tools"
+                                                    android:id="@+id/cell_container"
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="match_parent"
+                                                    android:layout_gravity="center"
+                                                    android:background="@color/color_yellow"
+                                                    android:paddingLeft="4px"
+                                                    android:paddingBottom="1px"
+                                                    android:lineSpacingExtra="-10px"
+                                                    android:typeface="monospace"
+    >
+</ca.starsoft.androidstudies.mysodoku.SquareTextView>

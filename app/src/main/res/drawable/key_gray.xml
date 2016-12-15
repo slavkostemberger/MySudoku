@@ -13,30 +13,12 @@
     <corners android:radius="18dp"/>
 </shape>
     -->
-<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle" >
-    android:shape="rectangle" >
-    <corners
-        android:radius="10dp"
-        />
-    <gradient
-        android:angle="90"
-        android:startColor="#C5C8C9"
-        android:endColor="#EDFDFF"
-        android:type="linear"
-        />
-    <padding
-        android:left="0dp"
-        android:top="0dp"
-        android:right="0dp"
-        android:bottom="0dp"
-        />
-    <size
-        android:width="270dp"
-        android:height="270dp"
-        />
-    <stroke
-        android:width="1dp"
-        android:color="#878787"
-        />
-
-</shape>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:state_pressed="true"
+        android:state_enabled="true"
+        android:drawable="@drawable/key_gray_pressed" />
+    <item
+        android:state_enabled="true"
+        android:drawable="@drawable/key_gray_normal" />
+</selector>
