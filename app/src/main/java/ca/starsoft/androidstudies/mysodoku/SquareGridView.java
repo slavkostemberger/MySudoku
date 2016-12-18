@@ -23,7 +23,9 @@ public class SquareGridView extends GridView
     }
 
     @Override
-    public void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        super.onMeasure(widthMeasureSpec, widthMeasureSpec);
+    public void onMeasure(int widthMeasureSpec, int heightMeasureSpec)
+    {
+        int n = Math.max(heightMeasureSpec, widthMeasureSpec);
+        super.onMeasure(n, n);
     }
 }

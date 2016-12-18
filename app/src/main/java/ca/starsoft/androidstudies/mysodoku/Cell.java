@@ -56,14 +56,18 @@ public class Cell
                " mSingleGuess = '" + mSingleGuess + "'" +
                " mGuessList = '" + mGuessList + "'";
     }
-
+    @Override
     public String toString()
     {
         return mNumberOfGuesses < 2 ? Character.toString(mSingleGuess)
-                                    : mGuessList.charAt(0) + mGuessList.charAt(1) + mGuessList.charAt(2) + "\n" +
-                                      mGuessList.charAt(3) + mGuessList.charAt(4) + mGuessList.charAt(5) + "\n" +
-                                      mGuessList.charAt(6) + mGuessList.charAt(7) + mGuessList.charAt(8);
+                                    : mGuessList.substring(0, 3) + "\n" +
+                                      mGuessList.substring(3, 6) + "\n" +
+                                      mGuessList.substring(6, 9);
+    }
 
+    public boolean isDispalyOnly()
+    {
+        return mDisplayOnly;
     }
     public char getCellValue()
     {
@@ -164,7 +168,7 @@ public class Cell
     {
         mColor = mDisplayOnly ? R.color.color_red
                               : R.color.color_green;
-        trace("---------------> mColor = " + mColor);
+        //trace("---------------> mColor = " + mColor);
     }
 
     public void resetColor()
@@ -188,22 +192,11 @@ public class Cell
      */
     public String getDisplayValue()
     {
-/*
-        String s = mGuessList.charAt(0) + mGuessList.charAt(1) + mGuessList.charAt(2) + "\n" +
-                   mGuessList.charAt(3) + mGuessList.charAt(4) + mGuessList.charAt(5) + "\n" +
-                   mGuessList.charAt(6) + mGuessList.charAt(7) + mGuessList.charAt(8);
-        return mGuessList.toString();
-/*
-        String s = mapChar(0) + mapChar(1) + mapChar(2) + "\n" +
-                   mapChar(3) + mapChar(4) + mapChar(5) + "\n" +
-                   mapChar(6) + mapChar(7) + mapChar(8);
-return s;
-/* */
+
         return mNumberOfGuesses < 2 ? Character.toString(mSingleGuess)
-                                    : mGuessList.charAt(0) + mGuessList.charAt(1) + mGuessList.charAt(2) + "\n" +
-                                      mGuessList.charAt(3) + mGuessList.charAt(4) + mGuessList.charAt(5) + "\n" +
-                                      mGuessList.charAt(6) + mGuessList.charAt(7) + mGuessList.charAt(8);
-/* */
+                                    : mGuessList.substring(0, 3) + "\n" +
+                                      mGuessList.substring(3, 6) + "\n" +
+                                      mGuessList.substring(6, 9);
     }
 
     /**

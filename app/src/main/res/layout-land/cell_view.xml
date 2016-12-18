@@ -6,10 +6,15 @@
                                                     android:layout_width="match_parent"
                                                     android:layout_height="match_parent"
                                                     android:layout_gravity="center"
-                                                    android:background="@color/color_yellow"
+                                                    android:gravity="center"
+                                                    android:drawSelectorOnTop="true"
+
+                                                    android:background="?android:attr/selectableItemBackground"
                                                     android:paddingLeft="4px"
                                                     android:paddingBottom="1px"
                                                     android:lineSpacingExtra="-10px"
                                                     android:typeface="monospace"
+                                                    android:textColor="@color/color_black"
+
     >
 </ca.starsoft.androidstudies.mysodoku.SquareTextView>

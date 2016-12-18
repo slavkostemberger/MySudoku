@@ -2,10 +2,12 @@ package ca.starsoft.androidstudies.mysodoku;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.util.StringBuilderPrinter;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -109,6 +111,36 @@ public class GridAdapter extends BaseAdapter
 
         Cell currentCell = (Cell) getItem(position);
         String cellVal = currentCell.getDisplayValue();
+        /**
+         * set the font based on nomber of lines (1 or 3) being displayed
+         * if more than one guess exitst than it's 3 lines
+         */
+        if(cellVal.length() == 1)
+        {
+            if(currentCell.isDispalyOnly())
+            {
+                view.setTextSize(TypedValue.COMPLEX_UNIT_PX, MainActivity.gCellSize/10*8);
+                view.setTypeface(null, Typeface.BOLD);
+            } else
+            {
+                view.setTextSize(TypedValue.COMPLEX_UNIT_PX, MainActivity.gCellSize/10*6);
+                view.setTypeface(null, Typeface.NORMAL);
+            }
+
+        } else
+        {
+            // Allow for a an extra pixel around the text by subtracting 2
+            // from the computed size
+            view.setTextSize(TypedValue.COMPLEX_UNIT_PX, MainActivity.gCellSize/3 - 2);
+            view.setTypeface(null, Typeface.NORMAL);
+        }
+        if(currentCell.isDispalyOnly())
+        {
+            view.setTypeface(null, Typeface.BOLD);
+        } else
+        {
+            view.setTypeface(null, Typeface.NORMAL);
+        }
         ((TextView) view).setText((CharSequence) currentCell.getDisplayValue());
         //trace("mGroup: " + mGroup + " position = " + position + " Cel# = " + (mGroup*9 + position) + " color = " + currentCell.getColor());
         view.setBackgroundColor(ContextCompat.getColor(mContext, currentCell.getColor()));

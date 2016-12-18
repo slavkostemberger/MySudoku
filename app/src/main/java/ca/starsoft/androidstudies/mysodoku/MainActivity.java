@@ -1,40 +1,31 @@
 package ca.starsoft.androidstudies.mysodoku;
 
-import android.content.Context;
 import android.content.res.Configuration;
 import android.graphics.Point;
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.text.style.TtsSpan;
 import android.util.DisplayMetrics;
 import android.util.Log;
-import android.util.TypedValue;
 import android.view.Display;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
 import android.widget.GridView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-
-import static android.R.attr.width;
-import static android.view.View.X;
 
 public class MainActivity extends AppCompatActivity
 {
     // ---------------------------------------------------------------------------------------------
+
+    public static int   gWidthPixels;
+    public static int   gHeightPixels;
+    public static float gDpScreenWidth;
+    public static float gDpScreenHeight;
+    public static float gScreenDensity;
+    public static int   gGridSize;
+    public static int   gCellSize;
 
     List<Cell>        mItemsList;
     int               mCurEntry = -1;
@@ -58,6 +49,39 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        /**
+         * Get screen size details
+         * This is used to compute the size of the SquareTextView used in the GridView
+         * and the font size for it based on 1 char or 9 chars
+         */
+        DisplayMetrics displayMetrics = this.getResources().getDisplayMetrics();
+
+        gWidthPixels    = displayMetrics.widthPixels;
+        gHeightPixels   = displayMetrics.heightPixels;
+        gScreenDensity  = getResources().getDisplayMetrics().density;
+        gDpScreenWidth  = gWidthPixels / gScreenDensity;
+        gDpScreenHeight = gHeightPixels / gScreenDensity;
+        // THe following is the cell size required by the SquareTextView class
+        int f = (int) (24.0 * gScreenDensity);
+        int adjFactor = 0;
+        gGridSize = gWidthPixels;
+        if (gWidthPixels > gHeightPixels)
+        {
+            gGridSize = gWidthPixels / 16*9;
+            adjFactor = (int) (24.0 * gScreenDensity) * 2;
+        }
+//        gCellSize = (Math.min(gWidthPixels, gHeightPixels) - adjFactor) / 9 - 6;
+        gCellSize = gGridSize / 9 - 6;
+
+        trace("   gWidthPixels = " + gWidthPixels);
+        trace("  gHeightPixels = " + gHeightPixels);
+        trace(" gScreenDensity = " + gScreenDensity);
+        trace(" gDpScreenWidth = " + gDpScreenWidth);
+        trace("gDpScreenHeight = " + gDpScreenHeight);
+        trace("      gCellSize = " + gCellSize);
+
+        // fontSize = (TextView Height) * (width DPI / height DPI) / (Screen Width * Screen Height);
+
         //
         // Observation:
         // The GridView view works as expected in portrait mode but in landscape mode it uses
@@ -68,34 +92,43 @@ public class MainActivity extends AppCompatActivity
         //
         // This problem occurs whether the action bars is displayed or not.
         // Further investigation is required to find out why this is happening
+
+        /**
+         * Get a "game" (at the moment there is only one)
+         */
         mItemsList = getGame();
 
+        /**
+         * Set up the 9 GridViews
+         * Each grid represent one 3 x 3 metrics and
+         * allows for a thick line to enclose it
+         */
         setGridListeners((GridView) findViewById(R.id.grid_view_1), 1);
         setGridListeners((GridView) findViewById(R.id.grid_view_2), 2);
         setGridListeners((GridView) findViewById(R.id.grid_view_3), 3);
+
         setGridListeners((GridView) findViewById(R.id.grid_view_4), 4);
         setGridListeners((GridView) findViewById(R.id.grid_view_5), 5);
         setGridListeners((GridView) findViewById(R.id.grid_view_6), 6);
+
         setGridListeners((GridView) findViewById(R.id.grid_view_7), 7);
         setGridListeners((GridView) findViewById(R.id.grid_view_8), 8);
         setGridListeners((GridView) findViewById(R.id.grid_view_9), 9);
-
-        //
-        // Set-up the key-listeners
-        //
+        /**
+         * Set-up the key-listeners
+         */
 
         setkeyListener((TextView) findViewById(R.id.key_1), 1);
         setkeyListener((TextView) findViewById(R.id.key_2), 2);
         setkeyListener((TextView) findViewById(R.id.key_3), 3);
+
         setkeyListener((TextView) findViewById(R.id.key_4), 4);
         setkeyListener((TextView) findViewById(R.id.key_5), 5);
         setkeyListener((TextView) findViewById(R.id.key_6), 6);
+
         setkeyListener((TextView) findViewById(R.id.key_7), 7);
         setkeyListener((TextView) findViewById(R.id.key_8), 8);
-        setkeyListener((TextView) findViewById(R.id.key_8), 9);
-
-        //setkeyListener((TextView) findViewById(R.id.key_1), -1); // Undo
-        //setkeyListener((TextView) findViewById(R.id.key_1), -2); // Redo
+        setkeyListener((TextView) findViewById(R.id.key_9), 9);
 
         // -----------------------------------------------------------------------------------------
         // Move the following into the test classes
@@ -117,7 +150,7 @@ public class MainActivity extends AppCompatActivity
 
     private void setGridListeners(GridView v, final int group)
     {
-        GridAdapter gridAdapter = new GridAdapter(this, mItemsList, group);
+        final GridAdapter gridAdapter = new GridAdapter(this, mItemsList, group);
         mGridAdapterList.add(gridAdapter);
 
         v.setAdapter(gridAdapter);
@@ -128,6 +161,7 @@ public class MainActivity extends AppCompatActivity
                                     int position, long id) {
 
                 mCurEntry = (group - 1)*9 + position;
+                trace("setGridListeners: (" + (group-1) + ", " + position + ")");
                 char curChar = mItemsList.get(mCurEntry).getCellValue();
                 mItemsList.get(mCurEntry).setColorCurr();
 
