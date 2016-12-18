@@ -63,12 +63,18 @@ public class MainActivity extends AppCompatActivity
         gDpScreenHeight = gHeightPixels / gScreenDensity;
         // THe following is the cell size required by the SquareTextView class
         int f = (int) (24.0 * gScreenDensity);
-        int adjFactor = 0;
+
+        /**
+         * We need to have different square size based on portrait/landscape to make things
+         * fit correctly. Experimentation indicated that the best portrait square size is
+         * 9/16 of the width.
+         *
+         * This needs further investigation to insure that it would work on different screens sizes
+         */
         gGridSize = gWidthPixels;
         if (gWidthPixels > gHeightPixels)
         {
             gGridSize = gWidthPixels / 16*9;
-            adjFactor = (int) (24.0 * gScreenDensity) * 2;
         }
 //        gCellSize = (Math.min(gWidthPixels, gHeightPixels) - adjFactor) / 9 - 6;
         gCellSize = gGridSize / 9 - 6;
@@ -218,7 +224,7 @@ public class MainActivity extends AppCompatActivity
     private void mkGameLine(List<Cell> l, String v)
     {
         //trace("mkGameLine: v = " + v);
-        for(int i = 0; i < v.length(); i = i+ 2)
+        for(int i = 0; i < v.length(); i = i + 2)
         {
             //trace("mkGameLine: i = " + i);
             l.add(new Cell(v.charAt(i), v.charAt(i + 1)));
